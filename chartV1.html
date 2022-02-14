@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chart</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chartBox">
+      <canvas id="myChart"></canvas>
+    </div>
+    <h2 style="text-align: center; margin-top: 2rem; font-family: Arial, Helvetica, sans-serif;">
+      Funding Generated 2010 - 2020 <br> Income by Funding Source
+    </h2>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js" integrity="sha512-R/QOHLpV1Ggq22vfDAWYOaMd5RopHrJNMxi8/lJu8Oihwi4Ho4BRFeiMiCefn9rasajKjnx9/fTQ/xkWnkDACg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+    // setup 
+    const data = {
+      labels: [
+        'UK Charitable Organization, £43,053,523',
+        'UKRI Research Council, £28,354,031',
+        'European Commisssion, £15,167,024',
+        'NIHR, £11,343,456',
+        'Private Sector, £10.139,478',
+        'NHS Funding, £6,187,590',
+        'Non UK Charitable Organization, £4,723,143',
+        'Non UK State Funding, £2,982,262',
+        'IMI2, £1,619,375',
+        'Other, £557,596'
+      ],
+      datasets: [{
+        hoverOffset: 5,
+        data: [34.68, 22.84, 12.22, 9.14, 8.17, 4.98, 3.81, 2.40, 1.30, 0.45],
+        backgroundColor: [
+          'rgb(96,192,201)',
+          'rgb(88,194,237)',
+          'rgb(43,121,189)',
+          'rgb(236,119,164)',
+          'rgb(241,153,98)',
+          'rgb(250,198,122)',
+          'rgb(43,121,189)',
+          'rgb(236,119,164)',
+          'rgb(223,221,232)',
+          'rgb(55,54,107)'
+        ],
+        borderWidth: 1
+      }]
+    };
+    
+    // legend padding bottom
+    const legendMargin = {
+      id: "legendMargin",
+      beforeInit(chart, legend, options){
+        // console.log(chart.legend.fit)
+        const fitValue = chart.legend.fit;
+        
+        chart.legend.fit = function fit() {
+          fitValue.bind(chart.legend)();
+          return this.height += 10;
+        }
+      }
+    };
+
+    // config 
+    const config = {
+      type: 'pie',
+      data,
+      plugins: [legendMargin, ], //ChartDataLabels
+      options: {
+        responsive: 'true',
+        plugins: {
+          // tooltip: {
+          //   enabled: false,
+          // },
+          // datalabels: {
+          //   align: 'center',
+          //   formatter: (value, context) => {
+          //     const datapoints = context.chart.data.datasets[0].data
+          //     function totalSum(total, datapoint) {
+          //       return total+ datapoint;
+          //     }
+          //     const totalValue = datapoints.reduce(totalSum, 0); 
+          //     const percentageValue = (value / totalValue * 100).toFixed(2);
+          //     return `${percentageValue}%`
+          //   },
+          //   color: '#FFFFFF'
+          // },
+          legend: {
+            display: true,
+            position: 'top',
+            align: 'start',
+            labels: {
+                padding: 5,
+                textAlign: 'left',
+            }
+          },
+        },
+        aspectRatio: 1,
+      }
+    };
+
+    // render init block
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+
+    console.log(myChart.config.data.datasets[0].data)
+    </script>
+
+  </body>
+</html>

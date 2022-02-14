@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chart v2</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+
+      .chart-container {
+        max-width: 600px;
+      }
+
+      .legend {
+        display: grid;
+        padding-bottom: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        justify-content: center;
+        align-items: center;
+      }
+
+      .btn-wrapper {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        font-size: .75rem;
+        margin: 0.1rem .5rem;
+      }
+
+      .btn{
+        border: none;
+        width: 40px;
+        height: 15px;
+        margin-right: .2rem;
+      }
+
+      .chart-title {
+        text-align: center; 
+        margin-top: 2rem; 
+        font-size: 1.5rem; 
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body style="width: 100%;">
+    <div class="chart-container"> 
+      <div class="legend">
+        <div class="btn-wrapper">
+            <button class="btn" style="background-color: rgb(96,192,201);"></button> UK Charitable Organization, £43,053,523
+        </div>
+        <div class="btn-wrapper">
+            <button class="btn" style="background-color: rgb(88,194,237);"></button> UKRI Research Council, £28,354,031
+        </div>
+        <div class="btn-wrapper">
+            <button class="btn" style="background-color: rgb(43,121,189);"></button> European Commisssion, £15,167,024
+        </div>
+        <div class="btn-wrapper">
+            <button class="btn" style="background-color: rgb(236,119,164);"></button> NIHR, £11,343,456
+        </div>
+        <div class="btn-wrapper">
+            <button class="btn" style="background-color: rgb(241,153,98);"></button> Private Sector, £10.139,478
+        </div>
+        <div class="btn-wrapper">
+            <button class="btn" style="background-color: rgb(250,198,122);"></button> NHS Funding, £6,187,590
+        </div>
+        <div class="btn-wrapper">
+            <button class="btn" style="background-color: rgb(43,121,189);"></button> Non UK Charitable Organization, £4,723,143
+        </div>
+        <div class="btn-wrapper">
+            <button class="btn" style="background-color: rgb(236,119,164);"></button> Non UK State Funding, £2,982,262
+        </div>
+        <div class="btn-wrapper">
+            <button class="btn" style="background-color: rgb(223,221,232);"></button> IMI2, £1,619,375
+        </div>
+        <div class="btn-wrapper">
+            <button class="btn" style="background-color: rgb(55,54,107);"></button> Other, £557,596               
+        </div>
+      </div>
+      <div class="chartBox">
+        <canvas id="myChart"></canvas>
+      </div>
+      <h1 class="chart-title">
+        Funding Generated 2010 - 2020 <br> Income by Funding Source
+      </h1>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    // setup 
+    const data = {
+      labels: [
+        'UK Charitable Organization, £43,053,523',
+        'UKRI Research Council, £28,354,031',
+        'European Commisssion, £15,167,024',
+        'NIHR, £11,343,456',
+        'Private Sector, £10.139,478',
+        'NHS Funding, £6,187,590',
+        'Non UK Charitable Organization, £4,723,143',
+        'Non UK State Funding, £2,982,262',
+        'IMI2, £1,619,375',
+        'Other, £557,596'
+      ],
+      datasets: [{
+        hoverOffset: 5,
+        data: [34.68, 22.84, 12.22, 9.14, 8.17, 4.98, 3.81, 2.40, 1.30, 0.45],
+        backgroundColor: [
+          'rgb(96,192,201)',
+          'rgb(88,194,237)',
+          'rgb(43,121,189)',
+          'rgb(236,119,164)',
+          'rgb(241,153,98)',
+          'rgb(250,198,122)',
+          'rgb(43,121,189)',
+          'rgb(236,119,164)',
+          'rgb(223,221,232)',
+          'rgb(55,54,107)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    // config 
+    const config = {
+      type: 'pie',
+      data,
+      options: {
+        responsive: 'true',
+        plugins: {
+          legend: {
+            display: false,
+            position: 'top',
+            align: 'start',
+            labels: {
+                padding: 5,
+                textAlign: 'left',
+            }
+          },
+        },
+        aspectRatio: 1,
+      }
+    };
+
+    // render init block
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+    </script>
+
+  </body>
+</html>
